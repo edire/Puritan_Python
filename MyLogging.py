@@ -10,7 +10,7 @@ file_name = 'log_' + str(dt.datetime.today().strftime('%Y%m%d_%H%M%S')) + '.txt'
 
 def NewLogger(logger_name, directory=None):
     if directory == None:
-        directory = './logs'
+        directory = os.path.join(os.getcwd(), 'logs')
     if not os.path.exists(directory):
         os.makedirs(directory)
     log_file =  os.path.join(directory, file_name)
