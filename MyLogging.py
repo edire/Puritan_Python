@@ -12,7 +12,7 @@ directory = os.path.join(os.getcwd(), 'logs')
 
 def LogDirectory(directory_new):
     global directory
-    directory = directory_new
+    directory = os.path.join(directory_new, 'logs')
 
 
 def NewLogger(logger_name):
