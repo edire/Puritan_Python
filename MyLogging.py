@@ -5,12 +5,17 @@ import logging
 import datetime as dt
 
 
+
 file_name = 'log_' + str(dt.datetime.today().strftime('%Y%m%d_%H%M%S')) + '.txt'
+directory = os.path.join(os.getcwd(), 'logs')
 
 
-def NewLogger(logger_name, directory=None):
-    if directory == None:
-        directory = os.path.join(os.getcwd(), 'logs')
+def LogDirectory(directory_new):
+    global directory
+    directory = directory_new
+
+
+def NewLogger(logger_name):
     if not os.path.exists(directory):
         os.makedirs(directory)
     log_file =  os.path.join(directory, file_name)
