@@ -28,15 +28,21 @@ def CallODBC2(db, server='ins-prod.database.windows.net'):
     return pyodbc.connect(conn_str)
 
 
-def RunSQL(db, sql):
-    conn = CallODBC2(db)
+def RunSQL(db, sql, server=None):
+    if server == None:
+        conn = CallODBC2(db)
+    else:
+        conn = CallODBC2(db, server)
     with conn.cursor() as cursor:
         cursor.execute(sql)
         conn.commit()
     
     
-def ReadSQL(db, sql):
-    conn = CallODBC2(db)
+def ReadSQL(db, sql, server=None):
+    if server == None:
+        conn = CallODBC2(db)
+    else:
+        conn = CallODBC2(db, server)
     return pd.read_sql_query(sql=sql, con=conn)
 
 
