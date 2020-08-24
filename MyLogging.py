@@ -6,7 +6,8 @@ import datetime as dt
 
 
 
-file_name = 'log_' + str(dt.datetime.today().strftime('%Y%m%d_%H%M%S')) + '.txt'
+file_name = 'log_' + str(dt.datetime.today().strftime('%Y-%m-%d')) + '.txt'
+# '%Y%m%d_%H%M%S'
 directory = os.path.join(os.getcwd(), 'logs')
 log_level = 20
 
