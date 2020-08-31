@@ -42,9 +42,41 @@ def SetLoggingLevel(log_level):
         logger.setLevel(log_level)
 
 
+
+# MyLogging.LogDirectory(os.path.dirname(__file__))
+# logger = MyLogging.NewLogger(__file__)
+
 #NOTSET 0
 #DEBUG 10
 #INFO 20
 #WARNING 30
 #ERROR 40
 #CRITICAL 50
+
+
+
+
+
+### Add computer name to log example
+
+
+# import logging
+# import socket
+
+# class HostnameFilter(logging.Filter):
+#     hostname = socket.gethostname()
+
+#     def filter(self, record):
+#         record.hostname = HostnameFilter.hostname
+#         return True
+
+
+# logger = logging.getLogger()
+# logger.setLevel(20)
+# stream_handler = logging.StreamHandler()
+# stream_handler.addFilter(HostnameFilter())
+# formatter = logging.Formatter('%(asctime)s %(hostname)s: %(levelname)s: %(message)s')
+# stream_handler.setFormatter(formatter)
+# logger.addHandler(stream_handler)
+
+# logger.info('test')
