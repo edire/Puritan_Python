@@ -15,18 +15,20 @@ log_level = 20
 def LogDirectory(directory_new):
     global directory
     directory = os.path.join(directory_new, 'logs')
-    
-    
+
+
 def LogLevel(level_new):
     global log_level
     log_level = level_new
-    
 
-def NewLogger(logger_name):
+
+def NewLogger(logger_name, use_cd=False):
+    if use_cd:
+        LogDirectory(os.path.dirname(logger_name))
     if not os.path.exists(directory):
         os.makedirs(directory)
     log_file =  os.path.join(directory, file_name)
-    
+
     logger = logging.getLogger(logger_name)
     logger.setLevel(log_level)
     file_handler = logging.FileHandler(log_file)
@@ -35,7 +37,7 @@ def NewLogger(logger_name):
     logger.addHandler(file_handler)
     return logger
 
-    
+
 def SetLoggingLevel(log_level):
     loggers = [logging.getLogger(name) for name in logging.root.manager.loggerDict]
     for logger in loggers:
