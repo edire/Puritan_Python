@@ -17,7 +17,8 @@ def SendEmail(to_email_addresses, subject, body, body_html=None, attach_file_add
 
     msg = EmailMessage()
     msg['To'] = to_email_addresses
-    msg['Cc'] = cc_email_addresses
+    if cc_email_addresses != None:
+        msg['Cc'] = cc_email_addresses
 #    msg['Bcc'] = ''
     msg['From'] = from_email_address
     msg['Reply-To'] = 'eric.dire@puritanlife.com'
