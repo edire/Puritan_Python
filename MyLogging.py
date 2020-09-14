@@ -3,13 +3,20 @@
 import os
 import logging
 import datetime as dt
-
+import socket
 
 
 file_name = 'log_' + str(dt.datetime.today().strftime('%Y-%m-%d')) + '.txt'
 # '%Y%m%d_%H%M%S'
 directory = os.path.join(os.getcwd(), 'logs')
 log_level = 20
+
+
+class HostnameFilter(logging.Filter):
+    hostname = socket.gethostname()
+    def filter(self, record):
+        record.hostname = HostnameFilter.hostname
+        return True
 
 
 def LogDirectory(directory_new):
@@ -32,7 +39,8 @@ def NewLogger(logger_name, use_cd=False):
     logger = logging.getLogger(logger_name)
     logger.setLevel(log_level)
     file_handler = logging.FileHandler(log_file)
-    formatter = logging.Formatter('%(asctime)s: %(name)s: %(levelname)s: %(message)s')
+    file_handler.addFilter(HostnameFilter())
+    formatter = logging.Formatter('%(asctime)s: %(hostname)s: %(name)s: %(levelname)s: %(message)s')
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
     return logger
