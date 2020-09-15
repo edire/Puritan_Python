@@ -39,11 +39,19 @@ def CallODBC(db
         return pyodbc.connect(raw_con)
 
 
-def RunSQL(db, sql, **kwargs):
+def RunSQL(db, sql, auto_commit=False, **kwargs):
     conn = CallODBC(db=db, engine='pyodbc', **kwargs)
+    if auto_commit==True:
+        conn.autocommit = True
+    else:
+        conn.autocommit = False
+
     with conn.cursor() as cursor:
         cursor.execute(sql)
-        conn.commit()
+        while cursor.nextset():
+            pass
+        if auto_commit==False:
+            conn.commit()
 
 
 def ReadSQL(db, sql, **kwargs):
