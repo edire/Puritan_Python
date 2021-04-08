@@ -80,10 +80,10 @@ def RemoveWhitespace(x):
 
 def DataCleanse(data):
     data.columns = data.columns.str.strip()
-    data.columns = data.columns.str.replace('\"', '')
-    data.columns = data.columns.str.replace('\'', '')
-    data.columns = data.columns.str.replace('\\n', '_')
-    data.columns = data.columns.str.replace(' ', '_')
+    data.columns = data.columns.str.replace('\"', '', regex=True)
+    data.columns = data.columns.str.replace('\'', '', regex=True)
+    data.columns = data.columns.str.replace('\\n', '_', regex=True)
+    data.columns = data.columns.str.replace(' ', '_', regex=True)
     data = data.applymap(RemoveWhitespace)
     data = data.where(pd.notnull(data), None)
     data['RowLoadDateTime'] = dt.now()
